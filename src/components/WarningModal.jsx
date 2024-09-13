@@ -9,7 +9,7 @@ const WarningModal = ({ isOpen, onClose }) => {
       <ModalContent>
         <h1>Warning!</h1>
         <p>
-          Please ensure you copy or write down the generated password using the copy button or by manually transcribing it from this form. This Password is not store by BYUI and cannot be retrieve after the page is quit of refresh. Thank you!
+          Please ensure to copy or write down the generated password using the copy button or by manually transcribing it from this form. This password is not store by BYUI and cannot be retrieve after the page is quit of refresh. Thank you!
         </p>
         <Button onClick={onClose}>I Understand</Button>
       </ModalContent>
@@ -38,8 +38,9 @@ const ModalContent = styled.div`
   text-align: center;
 
   h1 {
-    color: #FFD600;
+    color: #FFC400;
     margin-bottom: 10px;
+    font-size: large;
   }
 
   p {
