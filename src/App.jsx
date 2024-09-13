@@ -559,7 +559,13 @@ const ButtonContainer = styled.div`
   transition: margin 0.3s ease;
 
   @media (min-width: 1024px) and (max-width: 1440px) {
-    margin-top: ${props => props.isPasswordGenerated ? '50px' : '70px'};
+    margin-top: ${props => props.isPasswordGenerated ? '50px' : '10px'};
+
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 5px;
+    margin-top: 5px;
   }
 `;
 
@@ -586,7 +592,7 @@ const PasswordContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 5px;
-  background-color: #E0E0E0;
+  background-color: #EF5F5F5;
   border-radius: 2px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
@@ -594,6 +600,10 @@ const PasswordContainer = styled.div`
   &:hover {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    
+ }
 `;
 
 const LoadingText = styled.p`
