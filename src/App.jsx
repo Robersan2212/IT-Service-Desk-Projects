@@ -87,7 +87,7 @@ const questions = [
     "What is your favorite childhood cartoon?",
     "What is the name of a movie that has a great villain?",
     "What is your favorite song to listen to on a road trip?",
-    "What is the name of a video game that you find addictive?",
+    "What is the name of a video game that you played constantly?",
     "What is your favorite childhood vacation spot?",
     "What is the name of a movie that has a great hero?",
     "What is your favorite song to listen to when you're sad?",
@@ -288,7 +288,7 @@ function App() {
               <PasswordContainer>
                 <PasswordText>{password}</PasswordText>
                 <CopyButton onClick={copyToClipboard}>
-                  < CopyClipboard />
+                  <CopyClipboard />
                 </CopyButton>
               </PasswordContainer>
             </div>
@@ -325,6 +325,7 @@ const ChangeButtonStyle = css`
   box-sizing: border-box;
 
   border-radius: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   color: var(--secondary-color);
   padding: 1em 1.8em;
   background: var(--primary-color);
@@ -375,7 +376,6 @@ const ChangeButtonStyle = css`
   }
 
   &:hover {
-    background-color: var(--hover-color);
 
     .arrow {
       background: var(--secondary-color);
@@ -516,7 +516,7 @@ const QuestionContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${props => props.isPasswordGenerated ? '55px' : '55px'};
+  margin-top: ${props => props.isPasswordGenerated ? '55px' : '65px'};
   margin-bottom: ${props => props.isPasswordGenerated ? '10px' : '0'};
   transition: margin 0.3s ease;
 `;
@@ -543,8 +543,15 @@ const PasswordContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 25px;
+  margin-top: -10px;
+  background-color: #E0E0E0;
+  border-radius: 25px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
 `;
 
 const LoadingText = styled.p`
@@ -560,28 +567,42 @@ const PasswordText = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
   color: #006eb6;
-  padding: 10px;
-  background-color: #E0E0E0;
-  border-radius: 25px;
+  padding: 10px 15px;
   word-break: break-all;
+  margin: 0;
 
   @media (max-width: 480px) {
     font-size: 1rem;
-    padding: 8px;
+    padding: 8px 12px;
   }
 `;
 
 const CopyButton = styled.button`
-  svg {
-      width: 38px;
-      height: 21px;
-      margin-left: -34px;
-      margin-bottom: 49px;
-    }
-  
-      &:hover {
-    transform: scale(1.1);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+  }
+
+
+  &:hover svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.2));
+  }
+
+  &:active svg {
+    transform: scale(0.95);
   }
 `;
 
