@@ -7,6 +7,7 @@ import Button from './components/MakeButton';
 import Loader from './components/Loader';
 import PasswordLoader from './components/PasswordLoader';
 import Input from './components/Input';
+import WarningModal from './components/WarningModal';
 
 const questions = [
   "What is your favorite fictional character?",
@@ -121,6 +122,7 @@ function App() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [showAnswers, setShowAnswers] = useState(false);
   const [showCopyMessage, setShowCopyMessage] = useState(false);
+  const [showWarning, setShowWarning] = useState(true);
 
 
   useEffect(() => {
@@ -231,6 +233,10 @@ function App() {
     }, Math.random() * 3000 + 1000);
   };
 
+  const closeWarning = () => {
+    setShowWarning(false);
+  };
+
   if (loading) {
     return (
       <LoaderContainer>
@@ -241,6 +247,7 @@ function App() {
 
   return (
     <AppContainer>
+      <WarningModal isOpen={showWarning} onClose={closeWarning} />
       <ResponsiveModal formVisible={formVisible}>
         <Header>
           <LogoContainer>
@@ -395,7 +402,7 @@ const AppContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   background-color: #0B6DA2;
-  padding: 20px;
+  padding: 10px;
 `;
 
 const ResponsiveModal = styled.div`
@@ -411,16 +418,16 @@ const ResponsiveModal = styled.div`
   animation-delay: ${props => props.formVisible ? '0s' : '0.3s'};
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 15px;
   }
 
   @media (max-width: 480px) {
-    padding: 15px;
+    padding: 10px;
   }
   
   @media (min-width: 1024px) and (max-width: 1440px) {
-    max-width: 800px;
-    padding: 40px;
+    max-width: 700px;
+    padding: 25px;
   }
 `;
 
@@ -435,7 +442,7 @@ const LoaderContainer = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -444,12 +451,13 @@ const Header = styled.div`
 
   @media (min-width: 1024px) and (max-width: 1440px) {
     align-items: center;
-  
+    margin-bottom: 15px;
+  }
 `;
 
 const LogoContainer = styled.div`
   svg {
-    width: 150px;
+    width: 120px;
     height: auto;
   }
 
@@ -459,13 +467,13 @@ const LogoContainer = styled.div`
   
   @media (min-width: 1024px) and (max-width: 1440px) {
     svg {
-      width: 180px;
+      width: 150px;
     }
   }
 `;
 
 const TitleContainer = styled.div`
-  margin-left: 20px;
+  margin-left: 30px;
 
   h1 {
     font-size: 2.5rem;
@@ -512,10 +520,10 @@ const TitleContainer = styled.div`
   
   @media (min-width: 1024px) and (max-width: 1440px) {
     h1 {
-      font-size: 2.8rem;
+      font-size: 2.4rem;
     }
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   }
 `;
@@ -526,6 +534,7 @@ const QuestionContainer = styled.div`
   margin-bottom: 20px;
   margin-top: 68px;
   position: relative;
+  font-size: large;
 
   @media (max-width: 480px) {
     margin-bottom: 40px;
@@ -537,8 +546,8 @@ const QuestionContainer = styled.div`
   }
 
   @media (min-width: 1024px) and (max-width: 1440px) {
-    margin-bottom: 30px;
-    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-top: 40px;
   }
 `;
 
@@ -550,7 +559,7 @@ const ButtonContainer = styled.div`
   transition: margin 0.3s ease;
 
   @media (min-width: 1024px) and (max-width: 1440px) {
-    margin-top: ${props => props.isPasswordGenerated ? '65px' : '85px'};
+    margin-top: ${props => props.isPasswordGenerated ? '50px' : '70px'};
   }
 `;
 
@@ -611,7 +620,7 @@ const PasswordText = styled.p`
   @media (min-width: 1024px) and (max-width: 1440px) {
     font-size: 1.4rem;
     padding: 12px 18px;
-  }
+ }
 `;
 
 const CopyButton = styled.button`
