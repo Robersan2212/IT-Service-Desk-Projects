@@ -417,6 +417,11 @@ const ResponsiveModal = styled.div`
   @media (max-width: 480px) {
     padding: 15px;
   }
+  
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    max-width: 800px;
+    padding: 40px;
+  }
 `;
 
 const LoaderContainer = styled.div`
@@ -436,6 +441,10 @@ const Header = styled.div`
     flex-direction: column;
     align-items: center;
   }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    align-items: center;
+  
 `;
 
 const LogoContainer = styled.div`
@@ -446,6 +455,12 @@ const LogoContainer = styled.div`
 
   @media (max-width: 600px) {
     margin-bottom: 15px;
+  }
+  
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    svg {
+      width: 180px;
+    }
   }
 `;
 
@@ -494,6 +509,15 @@ const TitleContainer = styled.div`
     margin-left: 0;
     text-align: center;
   }
+  
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    h1 {
+      font-size: 2.8rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 const QuestionContainer = styled.div`
@@ -511,14 +535,23 @@ const QuestionContainer = styled.div`
   button {
     ${ChangeButtonStyle}
   }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${props => props.isPasswordGenerated ? '55px' : '65px'};
+  margin-top: ${props => props.isPasswordGenerated ? '55px' : '75px'};
   margin-bottom: ${props => props.isPasswordGenerated ? '10px' : '0'};
   transition: margin 0.3s ease;
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    margin-top: ${props => props.isPasswordGenerated ? '65px' : '85px'};
+  }
 `;
 
 const ResultContainer = styled.div`
@@ -543,9 +576,8 @@ const PasswordContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -10px;
+  margin-top: 5px;
   background-color: #E0E0E0;
-  border-radius: 25px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
 
@@ -574,6 +606,11 @@ const PasswordText = styled.p`
   @media (max-width: 480px) {
     font-size: 1rem;
     padding: 8px 12px;
+  }
+  
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    font-size: 1.4rem;
+    padding: 12px 18px;
   }
 `;
 
