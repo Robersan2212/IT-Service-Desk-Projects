@@ -134,6 +134,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  //Function to copy password to clipboard
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password).then(() => {
       setShowCopyMessage(true);
@@ -152,6 +153,7 @@ function App() {
     setSelectedQuestions(shuffled.slice(0, 3));
   };
 
+  //function to change questions with "change" password//
   const changeQuestion = (index) => {
     const newQuestions = [...selectedQuestions];
     const remainingQuestions = questions.filter(q => !selectedQuestions.includes(q));
@@ -163,7 +165,7 @@ function App() {
       return newAnswers;
     });
   };
-  //Function to handle input (Answer)//
+  //Function to handle new input (New Answer)//
   const handleInputChange = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
@@ -189,9 +191,18 @@ function App() {
     // Generate random numbers//
     const randomNum1 = getRandomNumber(0, 9);
     const randomNum2 = getRandomNumber(0, 9);
-    
+
+    //Create an array of the password parts
+    const parts = [part1, randomNum1.toString(), part2, specialChar, part3, randomNum2.toString()];
+
+    //Shuffle the array
+    for (let i = parts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [parts[i], parts[j]] = [parts[j], parts[i]];
+    }
+
     // Combine parts for the password//
-    let newPassword = part1 + randomNum1 + part2 + specialChar + part3 + randomNum2;
+    let newPassword = parts.join('');
     
     // Ensure the password contains at least one uppercase letter//
     const randomIndex = Math.floor(Math.random() * newPassword.length);
@@ -213,7 +224,7 @@ function App() {
 
     setIsGeneratingPassword(true);
     setPassword('');
-    setShowAnswers(true); // Show answers when generating password
+    setShowAnswers(true); 
     setTimeout(() => {
       const newPassword = createPassword();
       setPassword(newPassword);
@@ -309,6 +320,7 @@ function App() {
 
 
 
+//CSS styling //////
 
 //Loading Animation//
 const fadeInUp = keyframes`
@@ -546,7 +558,7 @@ const QuestionContainer = styled.div`
   }
 
   @media (min-width: 1024px) and (max-width: 1440px) {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     margin-top: 40px;
   }
 `;
@@ -592,6 +604,7 @@ const PasswordContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 5px;
+  margin-left:10px;
   background-color: #EF5F5F5;
   border-radius: 2px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
