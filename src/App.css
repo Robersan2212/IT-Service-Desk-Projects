@@ -1,21 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
-
 :root {
   --primary-blue: #007bff;
   --light-gray: #f8f9fa;
   --white: #ffffff;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  background-color: #0B6DA2;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
 }
 
 .result{
