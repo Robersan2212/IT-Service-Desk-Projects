@@ -613,16 +613,11 @@ const PasswordContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 90px;
   margin-top: 5px;
   margin-left:10px;
   background-color: #EF5F5F5;
-  border-radius: 2px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
 
-  &:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
 
   @media (min-width: 1024px) and (max-width: 1440px) {
     
@@ -661,7 +656,7 @@ const CopyButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 10px 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -670,7 +665,7 @@ const CopyButton = styled.button`
   border-bottom-right-radius: 25px;
 
   svg {
-    width: 24px;
+    width: 20px;
     height: 24px;
     transition: all 0.3s ease;
   }
