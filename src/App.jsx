@@ -8,6 +8,7 @@ import { ReactComponent as LockLogo } from './images/lock-alt.svg';
 import { ReactComponent as CopyClipboard } from './images/copy-to-clipboard-svgrepo-com.svg'
 
 //Components Imports//
+import PasswordAnalyzerCard from './components/PasswordAnalyzerCard';
 import Button from './components/MakeButton';
 import Loader from './components/Loader';
 import PasswordLoader from './components/PasswordLoader';
@@ -274,7 +275,10 @@ function App() {
 
   return (
     <AppContainer>
-      <WarningModal isOpen={showWarning} onClose={closeWarning}/>
+      <PasswordAnalyzerCard>
+        
+      </PasswordAnalyzerCard>
+      <WarningModal isOpen={showWarning} onClose={closeWarning} />
       <ResponsiveModal formVisible={formVisible}>
         <Header>
           <LogoContainer>
@@ -292,21 +296,19 @@ function App() {
                 <Input
                   question={question}
                   value={answers[index]}
-                  onChange={(value) => handleInputChange(index, value)}
-                />
-              <button type="button" className='ChangeButton' onClick={() => changeQuestion(index)}>
+                  onChange={(value) => handleInputChange(index, value)} />
+                <button type="button" className='ChangeButton' onClick={() => changeQuestion(index)}>
                   Change
                   <span className="arrow-wrapper">
-                  <span className="arrow"></span>
+                    <span className="arrow"></span>
                   </span>
-              </button>
+                </button>
               </QuestionContainer>
             ))}
           </div>
           <ButtonContainer>
             <Button onClick={isPasswordGenerated ? regeneratePassword : generatePassword}
-              text={isPasswordGenerated ? "Regenerate Password" : "Make My Password"}
-            />
+              text={isPasswordGenerated ? "Regenerate Password" : "Make My Password"} />
           </ButtonContainer>
         </form>
         <ResultContainer isVisible={isGeneratingPassword || password}>
@@ -336,7 +338,7 @@ function App() {
 
 
 
-//CSS styling //////
+/////////////CSS styling//////////////////
 
 //Loading Animation//
 const fadeInUp = keyframes`
