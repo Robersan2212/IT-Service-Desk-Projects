@@ -8,12 +8,12 @@ import { ReactComponent as LockLogo } from './images/lock-alt.svg';
 import { ReactComponent as CopyClipboard } from './images/copy-to-clipboard-svgrepo-com.svg'
 
 //Components Imports//
-import PasswordAnalyzerCard from './components/PasswordAnalyzerCard';
-import Button from './components/MakeButton';
-import Loader from './components/Loader';
-import PasswordLoader from './components/PasswordLoader';
-import Input from './components/Input';
-import WarningModal from './components/WarningModal';
+import PasswordAnalyzerCard from './assests/components/PasswordAnalyzerCard';
+import Button from './assests/components/MakeButton';
+import Loader from './assests/components/Loader';
+import PasswordLoader from './assests/components/PasswordLoader';
+import Input from './assests/components/Input';
+import WarningModal from './assests/components/WarningModal';
 
 //JavaScript question declaration
 const questions = [
@@ -276,7 +276,11 @@ function App() {
   return (
     <AppContainer>
       <PasswordAnalyzerCard>
-        
+        <Header>
+          <TitleContainer>
+            <h1>Analyze Your Password</h1>
+          </TitleContainer>
+        </Header>
       </PasswordAnalyzerCard>
       <WarningModal isOpen={showWarning} onClose={closeWarning} />
       <ResponsiveModal formVisible={formVisible}>
@@ -441,7 +445,7 @@ const ResponsiveModal = styled.div`
   padding: 30px;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   opacity: 0;
   transform: translateY(20px);
   animation: ${fadeInUp} 0.6s ease-out forwards;
@@ -722,5 +726,6 @@ const SlidingMessage = styled.div`
   z-index: 1000;
   animation: ${props => props.isVisible ? css`${slideIn} 0.5s forwards` : css`${slideOut} 0.5s forwards`};
 `;
+///////////// END CSS styling//////////////////
 
 export default App;

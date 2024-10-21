@@ -6,6 +6,7 @@ const PasswordAnalyzerCard = () => {
     <StyledWrapper>
       <div className="modal">
         <form className="form">
+          <h1>Analyze Your Password</h1>
         </form>
       </div>
     </StyledWrapper>
