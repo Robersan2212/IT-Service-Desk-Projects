@@ -1,14 +1,20 @@
+//React UX, Keyframe, CSS import//
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
+
+//Image Imports//
 import { ReactComponent as BYULogo } from './images/logobox-04.svg'; 
 import { ReactComponent as LockLogo } from './images/lock-alt.svg';
 import { ReactComponent as CopyClipboard } from './images/copy-to-clipboard-svgrepo-com.svg'
+
+//Components Imports//
 import Button from './components/MakeButton';
 import Loader from './components/Loader';
 import PasswordLoader from './components/PasswordLoader';
 import Input from './components/Input';
 import WarningModal from './components/WarningModal';
 
+//JavaScript question declaration
 const questions = [
   //Music//
   "What is your favorite song?",
@@ -268,7 +274,7 @@ function App() {
 
   return (
     <AppContainer>
-      <WarningModal isOpen={showWarning} onClose={closeWarning} />
+      <WarningModal isOpen={showWarning} onClose={closeWarning}/>
       <ResponsiveModal formVisible={formVisible}>
         <Header>
           <LogoContainer>
