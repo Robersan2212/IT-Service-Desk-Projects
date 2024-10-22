@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 //Image Imports//
-import { ReactComponent as BYULogo } from './assests/components/mainForm/images/logobox-04.svg'; 
-import { ReactComponent as LockLogo } from './assests/components/mainForm/images/lock-alt.svg';
-import { ReactComponent as CopyClipboard } from './assests/components/mainForm/images/copy-to-clipboard-svgrepo-com.svg'
+import { ReactComponent as BYULogo } from './assests/components/mainCard/images/logobox-04.svg'; 
+import { ReactComponent as LockLogo } from './assests/components/mainCard/images/lock-alt.svg';
+import { ReactComponent as CopyClipboard } from './assests/components/mainCard/images/copy-to-clipboard-svgrepo-com.svg'
 
 //Components Imports//
 import PasswordAnalyzerCard from './assests/components/analyzerCardWidget/PasswordAnalyzerCard';
-import Button from './assests/components/mainForm/MakeButton';
-import Loader from './assests/components/mainForm/Loader';
-import PasswordLoader from './assests/components/mainForm/PasswordLoader';
-import Input from './assests/components/mainForm/Input';
-import WarningModal from './assests/components/mainForm/WarningModal';
+import Button from './assests/components/mainCard/MakeButton';
+import Loader from './assests/components/mainCard/Loader';
+import PasswordLoader from './assests/components/mainCard/PasswordLoader';
+import Input from './assests/components/mainCard/Input';
+import WarningModal from './assests/components/mainCard/WarningModal';
 
 //JavaScript question declaration
 const questions = [
