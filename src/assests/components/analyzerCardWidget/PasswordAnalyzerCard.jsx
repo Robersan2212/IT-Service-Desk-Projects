@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+//Components import from analyzerCardWidget folder//
+import AnalyzerHeader from "./AnalyzerHeader";
+
 const PasswordAnalyzerCard = () => {
   return (
     <StyledWrapper>
       <div className="modal">
         <form className="form">
-          <h1>Analyze Your Password</h1>
+          <AnalyzerHeader></AnalyzerHeader>
         </form>
       </div>
     </StyledWrapper>
@@ -14,10 +17,6 @@ const PasswordAnalyzerCard = () => {
 };
 
 const StyledWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end; /* Aligns the .modal to the right */
-  align-items: center; /* Centers the .modal vertically */
-
   .modal {
   background: white;
   margin-right: 110px;
@@ -31,18 +30,24 @@ const StyledWrapper = styled.div`
   border-radius: 26px;
 
 
-  //responsive modules//
+ ////////responsive modules/////////
   @media (max-width: 768px) {
     padding: 15px;
+    margin-left:0;
   }
 
   @media (max-width: 480px) {
     padding: 10px;
+    margin-left:0;
   }
   
+  //laptop screen size
   @media (min-width: 1024px) and (max-width: 1440px) {
     max-width: 700px;
-    padding: 25px;
+    margin-left:-55px;
+    margin-right:40px;
+    width: 60vh;
+    height: 80vh;
   }
 
 }

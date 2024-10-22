@@ -8,7 +8,7 @@ import { ReactComponent as LockLogo } from './assests/images/lock-alt.svg';
 import { ReactComponent as CopyClipboard } from './assests/images/copy-to-clipboard-svgrepo-com.svg'
 
 //Components Imports//
-import PasswordAnalyzerCard from './assests/components/analyzeWidget/PasswordAnalyzerCard';
+import PasswordAnalyzerCard from './assests/components/analyzerCardWidget/PasswordAnalyzerCard';
 import Button from './assests/components/mainForm/MakeButton';
 import Loader from './assests/components/mainForm/Loader';
 import PasswordLoader from './assests/components/mainForm/PasswordLoader';
