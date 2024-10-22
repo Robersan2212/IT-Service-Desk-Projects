@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 //Image Imports//
-import { ReactComponent as BYULogo } from './assests/images/logobox-04.svg'; 
-import { ReactComponent as LockLogo } from './assests/images/lock-alt.svg';
-import { ReactComponent as CopyClipboard } from './assests/images/copy-to-clipboard-svgrepo-com.svg'
+import { ReactComponent as BYULogo } from './assests/components/mainForm/images/logobox-04.svg'; 
+import { ReactComponent as LockLogo } from './assests/components/mainForm/images/lock-alt.svg';
+import { ReactComponent as CopyClipboard } from './assests/components/mainForm/images/copy-to-clipboard-svgrepo-com.svg'
 
 //Components Imports//
 import PasswordAnalyzerCard from './assests/components/analyzerCardWidget/PasswordAnalyzerCard';
