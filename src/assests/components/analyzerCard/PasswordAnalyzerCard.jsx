@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 //Components import from analyzerCardWidget folder//
 import AnalyzerHeader from "./Header";
+import DisplayPasswordBox from "./DisplayPasswordBox";
 
 const PasswordAnalyzerCard = () => {
   return (
@@ -10,6 +11,7 @@ const PasswordAnalyzerCard = () => {
       <div className="modal">
         <form className="form">
           <AnalyzerHeader></AnalyzerHeader>
+          <DisplayPasswordBox></DisplayPasswordBox>
           
         </form>
       </div>

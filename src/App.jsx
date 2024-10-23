@@ -275,8 +275,7 @@ function App() {
 
   return (
     <AppContainer>
-      <PasswordAnalyzerCard>
-      </PasswordAnalyzerCard>
+      <PasswordAnalyzerCard></PasswordAnalyzerCard>
       <WarningModal isOpen={showWarning} onClose={closeWarning} />
       <ResponsiveModal formVisible={formVisible}>
         <Header>
