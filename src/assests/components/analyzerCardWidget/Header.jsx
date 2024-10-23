@@ -1,4 +1,4 @@
-import { Component as Magnifier } from './images/magnifying-glass-svgrepo-com.svg'
+import { ReactComponent as Magnifier } from './images/magnifying-glass-9-svgrepo-com.svg'
 
 import React from "react"
 import styled from "styled-components"
@@ -18,19 +18,31 @@ const StyledWrapper = styled.div`
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:wght@100;400;500&display=swap');
 
 .card-header h1{
-display: flex;
-align-items: flex-start;
-color: #006eb6;
-font-size: 1.6rem;
-font-family:'Roboto', sans-serif;
-font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    color: #006eb6;
+    font-size: 1.5rem;
+    font-family:'Roboto', sans-serif;
+    font-weight: 500;
 
-@media (min-width: 1024px) and (max-width: 1440px){
-font-size:1.1rem;
+    //laptop screen size
+    @media (min-width: 1024px) and (max-width: 1440px){
+        font-size:1.4rem;
+        margin-left: 2px;
+
+        svg{
+        height: 30px;
+        width: 28px;
+        margin-right:9px;
+        }
+    }
 }
+
+svg{
+height: 40px;
+width: 40px;
+margin-right:8px;
 }
-
-
 `;
 
 export default AnalyzerHeader;
