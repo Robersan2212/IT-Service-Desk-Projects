@@ -33,6 +33,12 @@ const StyledWrapper = styled.div`
         font-family: 'Roboto', sans-seriff; 
 
     }
+    
+    h3{
+    font-family: 'Roboto', sans-seriff;
+    padding: 3px;
+    margin-top: 20px
+    }
 `
 
 
