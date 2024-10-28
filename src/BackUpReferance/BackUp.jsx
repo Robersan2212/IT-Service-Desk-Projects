@@ -9,10 +9,10 @@ import { ReactComponent as CopyClipboard } from './assests/components/mainCard/i
 
 //Components Imports//
 import PasswordAnalyzerCard from '../assests/components/analyzerCard/PasswordAnalyzerCard';
-import Button from '../assests/components/mainCard/MakeButton';
-import Loader from '../assests/components/mainCard/Loader';
+import Button from '../assests/components/mainCard/buttons/MakeButton';
+import Loader from '../assests/components/mainCard/actions/Loader';
 import PasswordLoader from '../assests/components/mainCard/PasswordLoader';
-import Input from '../assests/components/mainCard/Input';
+import Input from '../assests/components/mainCard/inputs/Input';
 import WarningModal from '../assests/components/mainCard/WarningModal';
 import QuestionsAnswersHandler from '../assests/components/mainCard/QuestionsAnswersHandler';
 

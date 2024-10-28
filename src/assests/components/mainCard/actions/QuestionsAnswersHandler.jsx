@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Input from './Input';
+import Input from './inputs/Input';
 
 const QuestionsAnswersHandler = ({ onAnswersChange }) => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
