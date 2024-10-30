@@ -12,7 +12,6 @@ const ResponsiveModalCard = () => {
 
   const handleAnswersChange = (newAnswers) => {
     setAnswers(newAnswers);
-    // You can add additional logic here for handling the answers
     console.log('Answers updated:', newAnswers);
   };
   
@@ -36,6 +35,7 @@ const StyledWrapper = styled.div`
   background: white;
   border-radius: 20px;
   padding: 30px;
+  margin-right: -80px;
   width: 90%;
   max-width: 600px;
   box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 

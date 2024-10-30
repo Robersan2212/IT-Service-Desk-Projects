@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 //Component Imports//
 import ResponsiveModalCard from './assets/components/mainCard/ResponsiveModalCard';
 import LoaderContainer from './assets/components/mainCard/loader/LoaderContainer';
-
+import PasswordAnalyzerCard from './assets/components/analyzerCard/PasswordAnalyzerCard';
 
 function App() {
   const [formVisible, setFormVisible] = useState(false);
@@ -28,6 +28,7 @@ function App() {
   //Main structure.
   return (
     <AppContainer>
+      <PasswordAnalyzerCard />
       <StyledModalCard formVisible={formVisible} />
     </AppContainer>
   );
