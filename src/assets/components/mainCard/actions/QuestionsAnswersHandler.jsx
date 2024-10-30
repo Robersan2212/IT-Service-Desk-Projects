@@ -1,7 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Input from './inputs/Input';
+import styled, { css } from 'styled-components';
+import Input from '../inputs/Input';
 
+// First, define the ChangeButtonStyle
+const ChangeButtonStyle = css`
+  --primary-color: #0B6DA2;
+  --secondary-color: #fff;
+  --hover-color: #111;
+  --arrow-width: 10px;
+  --arrow-stroke: 2px;
+  box-sizing: border-box;
+
+  border-radius: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #006eb6;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 200px;
+  font-size: 0.8rem;
+
+  .arrow-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arrow {
+    margin-top: 1px;
+    width: var(--arrow-width);
+    background: var(--primary-color);
+    height: var(--arrow-stroke);
+    position: relative;
+    transition: 0.2s;
+
+    &::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      border: solid var(--secondary-color);
+      border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+      display: inline-block;
+      top: -3px;
+      right: 3px;
+      transition: 0.2s;
+      padding: 3px;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:hover {
+    .arrow {
+      background: var(--secondary-color);
+
+      &:before {
+        right: 0;
+      }
+    }
+  }
+`;
+
+// Then define the QuestionContainer that uses it
+const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 68px;
+  position: relative;
+  font-size: large;
+
+  @media (max-width: 480px) {
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+
+  button {
+    ${ChangeButtonStyle}
+  }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    margin-bottom: 30px;
+    margin-top: 40px;
+  }
+`;
 const QuestionsAnswersHandler = ({ onAnswersChange }) => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [answers, setAnswers] = useState(['', '', '']);
@@ -115,154 +209,64 @@ const QuestionsAnswersHandler = ({ onAnswersChange }) => {
   "What is your favorite Book of Mormon chapter?"
   ];
 
-  // Initialize random questions
-  useEffect(() => {
-    shuffleQuestions();
-  }, []);
+ // Initialize random questions
+ useEffect(() => {
+  shuffleQuestions();
+}, []);
 
-  // Shuffle and select random questions
-  const shuffleQuestions = () => {
-    const shuffled = [...questions].sort(() => 0.5 - Math.random());
-    setSelectedQuestions(shuffled.slice(0, 3));
-  };
-
-  // Change a specific question
-  const changeQuestion = (index) => {
-    const newQuestions = [...selectedQuestions];
-    const remainingQuestions = questions.filter(q => !selectedQuestions.includes(q));
-    newQuestions[index] = remainingQuestions[Math.floor(Math.random() * remainingQuestions.length)];
-    setSelectedQuestions(newQuestions);
-    
-    // Reset the answer for changed question
-    const newAnswers = [...answers];
-    newAnswers[index] = '';
-    setAnswers(newAnswers);
-    onAnswersChange(newAnswers);
-  };
-
-  // Handle answer changes
-  const handleInputChange = (index, value) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = value;
-    setAnswers(newAnswers);
-    onAnswersChange(newAnswers);
-  };
-
-  return {
-    selectedQuestions,
-    answers,
-    changeQuestion,
-    handleInputChange
-  };
+// Shuffle and select random questions
+const shuffleQuestions = () => {
+  const shuffled = [...questions].sort(() => 0.5 - Math.random());
+  setSelectedQuestions(shuffled.slice(0, 3));
 };
 
-<QuestionContainer key={index}>
-                <Input
-                  question={question}
-                  value={answers[index]}
-                  onChange={(value) => handleInputChange(index, value)} />
-                <button type="button" className='ChangeButton' onClick={() => changeQuestion(index)}>
-                  Change
-                  <span className="arrow-wrapper">
-                    <span className="arrow"></span>
-                  </span>
-                </button>
-</QuestionContainer>
+// Change a specific question
+const changeQuestion = (index) => {
+  const newQuestions = [...selectedQuestions];
+  const remainingQuestions = questions.filter(q => !selectedQuestions.includes(q));
+  newQuestions[index] = remainingQuestions[Math.floor(Math.random() * remainingQuestions.length)];
+  setSelectedQuestions(newQuestions);
+  
+  // Reset the answer for changed question
+  const newAnswers = [...answers];
+  newAnswers[index] = '';
+  setAnswers(newAnswers);
+  onAnswersChange(newAnswers);
+};
+
+// Handle answer changes
+const handleInputChange = (index, value) => {
+  const newAnswers = [...answers];
+  newAnswers[index] = value;
+  setAnswers(newAnswers);
+  onAnswersChange(newAnswers);
+};
+
+return (
+  <div>
+      {selectedQuestions.map((question, index) => (
+        <QuestionContainer key={index}>
+          <Input
+            question={question}
+            value={answers[index]}
+            onChange={(value) => handleInputChange(index, value)}
+          />
+          <button
+            type="button"
+            className="ChangeButton"
+            onClick={() => changeQuestion(index)}
+          >
+            Change
+            <span className="arrow-wrapper">
+              <span className="arrow"></span>
+            </span>
+          </button>
+        </QuestionContainer>
+      ))}
+    </div>
+  );
+};
 
 
-const QuestionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  margin-top: 68px;
-  position: relative;
-  font-size: large;
-
-  @media (max-width: 480px) {
-    margin-bottom: 40px;
-    margin-top: 40px;
-  }
-
-  button {
-    ${ChangeButtonStyle}
-  }
-
-  @media (min-width: 1024px) and (max-width: 1440px) {
-    margin-bottom: 30px;
-    margin-top: 40px;
-  }
-`;
-
-//Style for change button to change questions//
-const ChangeButtonStyle = css`
-  --primary-color: #0B6DA2;
-  --secondary-color: #fff;
-  --hover-color: #111;
-  --arrow-width: 10px;
-  --arrow-stroke: 2px;
-  box-sizing: border-box;
-
-  border-radius: 20px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  color: var(--secondary-color);
-  padding: 1em 1.8em;
-  background: var(--primary-color);
-  display: flex;
-  transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background-color: #006eb6;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 200px;
-  font-size: 0.8rem;
-
-  .arrow-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .arrow {
-    margin-top: 1px;
-    width: var(--arrow-width);
-    background: var(--primary-color);
-    height: var(--arrow-stroke);
-    position: relative;
-    transition: 0.2s;
-
-    &::before {
-      content: "";
-      box-sizing: border-box;
-      position: absolute;
-      border: solid var(--secondary-color);
-      border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
-      display: inline-block;
-      top: -3px;
-      right: 3px;
-      transition: 0.2s;
-      padding: 3px;
-      transform: rotate(-45deg);
-    }
-  }
-
-  &:hover {
-
-    .arrow {
-      background: var(--secondary-color);
-
-      &:before {
-        right: 0;
-      }
-    }
-  }
-`;
 
 export default QuestionsAnswersHandler;
