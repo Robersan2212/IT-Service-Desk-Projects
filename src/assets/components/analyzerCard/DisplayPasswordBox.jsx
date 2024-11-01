@@ -7,10 +7,10 @@ const DisplayPasswordBox = () =>{
         <StyledWrapper> 
             <h2>Your password: </h2>
             <div className='display-box'>
-                {/* You can add text or leave it empty with dimensions */}
+                {/*Add text or leave it empty with dimensions */}
                 &nbsp; {/* This is for empty box */}
             </div>
-            <h3>estimate time to crack your password: </h3>
+            <h3>Details: </h3>
         </StyledWrapper>
     )    
 }
@@ -19,8 +19,9 @@ const StyledWrapper = styled.div`
     @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:wght@100;400;500&display=swap');
     .display-box{
         display: flex; 
-        background-color: #d7dbdd;
+        background-color: #006eb6;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 9px;
         margin-top: 20px;
         height: 5vh;
         width: 100%;

@@ -26,7 +26,7 @@ const StyledWrapper = styled.div`
     padding: 0.5em 0.8em; 
     outline: none;
     overflow: hidden;
-    background-color: #FAFAFA;
+    background-color: white;
     border-radius: 10px;
     transition: all 0.5s;
     font-size: 1em; 

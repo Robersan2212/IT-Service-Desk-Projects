@@ -1,28 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css } from 'styled-components';
-
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import HeaderContainer from "./header/HeaderContainer";
 import QuestionsAnswersHandler from "./actions/QuestionsAnswersHandler";
-
-
-
+import ButtonContainer from './buttons/ButtonContainer';
+import LengthDropdown from './buttons/LengthDropdown';
 
 const ResponsiveModalCard = () => {
   const [answers, setAnswers] = useState(['', '', '']);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
+  const [selectedLength, setSelectedLength] = useState('all');
 
   const handleAnswersChange = (newAnswers) => {
     setAnswers(newAnswers);
-    console.log('Answers updated:', newAnswers);
+  };
+
+  const handleQuestionsChange = (questions) => {
+    setSelectedQuestions(questions);
   };
   
   return (
     <StyledWrapper>
       <div className="modal">
         <HeaderContainer />
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div id="questions">
-            <QuestionsAnswersHandler onAnswersChange={handleAnswersChange}/>
+            <QuestionsAnswersHandler 
+              onAnswersChange={handleAnswersChange}
+              onQuestionsChange={handleQuestionsChange}
+            />
           </div>
+          <LengthDropdown onLengthChange={setSelectedLength} />
+          <ButtonContainer 
+            answers={answers}
+            selectedLength={selectedLength}
+            selectedQuestions={selectedQuestions}
+          />
         </form>
       </div>
     </StyledWrapper>

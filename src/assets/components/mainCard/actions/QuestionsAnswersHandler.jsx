@@ -96,7 +96,7 @@ const QuestionContainer = styled.div`
     margin-top: 40px;
   }
 `;
-const QuestionsAnswersHandler = ({ onAnswersChange }) => {
+const QuestionsAnswersHandler = ({ onAnswersChange, onQuestionsChange }) => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [answers, setAnswers] = useState(['', '', '']);
 
@@ -217,7 +217,9 @@ const QuestionsAnswersHandler = ({ onAnswersChange }) => {
 // Shuffle and select random questions
 const shuffleQuestions = () => {
   const shuffled = [...questions].sort(() => 0.5 - Math.random());
-  setSelectedQuestions(shuffled.slice(0, 3));
+  const selected = shuffled.slice(0, 3);
+  setSelectedQuestions(selected);
+  onQuestionsChange(selected); // Pass questions up to parent
 };
 
 // Change a specific question
@@ -226,6 +228,7 @@ const changeQuestion = (index) => {
   const remainingQuestions = questions.filter(q => !selectedQuestions.includes(q));
   newQuestions[index] = remainingQuestions[Math.floor(Math.random() * remainingQuestions.length)];
   setSelectedQuestions(newQuestions);
+  onQuestionsChange(newQuestions); // Pass updated questions up
   
   // Reset the answer for changed question
   const newAnswers = [...answers];
