@@ -169,7 +169,7 @@ const StyledWrapper = styled.div`
 
   @media (min-width: 1024px) and (max-width: 1440px) {
     margin-top: ${props => props.isPasswordGenerated ? '60px' : '60px'};
-     margin-left: ${props => props.isPasswordGenerated ? '100px' : '0px'};
+     margin-left: ${props => props.isPasswordGenerated ? '100px' : '40px'};
   }
   
   @media (max-width: 480px) {

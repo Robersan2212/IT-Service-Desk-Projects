@@ -6,7 +6,6 @@ import styled, { keyframes } from 'styled-components';
 import ResponsiveModalCard from './assets/components/mainCard/ResponsiveModalCard';
 import LoaderContainer from './assets/components/mainCard/loader/LoaderContainer';
 import PasswordAnalyzerCard from './assets/components/analyzerCard/PasswordAnalyzerCard';
-
 function App() {
   const [formVisible, setFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
