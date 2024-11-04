@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import MakeButton from "./MakeButton";
-import Loader from '../loader/Loader';
+import GenerationLoader from '../loader/GenerationLoader';
 
-const ButtonContainer = ({ answers, selectedLength, selectedQuestions }) => {
+
+const ButtonContainer = ({ answers, selectedLength, selectedQuestions, onPasswordGenerate }) => {
   const [isPasswordGenerated, setIsPasswordGenerated] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [lastPattern, setLastPattern] = useState(0); // Track last used pattern
 
   const generatePassword = async () => {
-    const length = selectedLength === 'option-1' ? 12 : selectedLength === 'option-2' ? 16 : 12;
+    const length = selectedLength === 'option-1' ? 12 : selectedLength === 'option-2' ? 16 : selectedLength === 'option-3' ? 18 : 12;
     const getRandomChar = (chars) => chars[Math.floor(Math.random() * chars.length)];
     const specialChars = '!@#$%^&*?';
     const numbers = '0123456789';
@@ -129,6 +130,7 @@ const ButtonContainer = ({ answers, selectedLength, selectedQuestions }) => {
       const newPassword = await generatePassword();
       setGeneratedPassword(newPassword);
       setIsPasswordGenerated(true);
+      onPasswordGenerate(newPassword); // Pass the password up to App component
     } catch (error) {
       console.error("Error generating password:", error);
       alert("There was an error generating your password. Please try again.");
@@ -140,9 +142,10 @@ const ButtonContainer = ({ answers, selectedLength, selectedQuestions }) => {
   return (
     <StyledWrapper isPasswordGenerated={isPasswordGenerated}>
       {isGenerating ? (
-        <LoaderWrapper>
-          <Loader />
-        </LoaderWrapper>
+        <GenerationWrapper>
+          <GenerationLoader />
+          <LoadingText>Generating your secure password</LoadingText>
+        </GenerationWrapper>
       ) : (
         <MakeButton 
           onClick={handleGeneratePassword}
@@ -158,7 +161,7 @@ const ButtonContainer = ({ answers, selectedLength, selectedQuestions }) => {
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${props => props.isPasswordGenerated ? '150px' : '90px'};
+  margin-top: ${props => props.isPasswordGenerated ? '100px' : '90px'};
   margin-bottom: ${props => props.isPasswordGenerated ? '10px' : '0'}
   margin-left: ${props => props.isPasswordGenerated ? '100px' : '100px'};
   margin-left: 55px;
@@ -175,11 +178,22 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const LoaderWrapper = styled.div`
+const GenerationWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
   min-height: 100px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+`;
+const LoadingText = styled.div`
+  color: #006eb6;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
 `;
 
 export default ButtonContainer;

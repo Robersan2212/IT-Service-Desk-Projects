@@ -5,13 +5,13 @@ import styled from "styled-components";
 import AnalyzerHeader from "./Header";
 import DisplayPasswordBox from "./DisplayPasswordBox";
 
-const PasswordAnalyzerCard = () => {
+const PasswordAnalyzerCard = ({ password }) => {
   return (
     <StyledWrapper>
       <div className="modal">
         <form className="form">
           <AnalyzerHeader></AnalyzerHeader>
-          <DisplayPasswordBox></DisplayPasswordBox>
+          <DisplayPasswordBox password={password} />
           
         </form>
       </div>

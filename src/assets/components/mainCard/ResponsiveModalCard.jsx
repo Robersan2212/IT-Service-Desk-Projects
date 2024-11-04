@@ -5,7 +5,7 @@ import QuestionsAnswersHandler from "./actions/QuestionsAnswersHandler";
 import ButtonContainer from './buttons/ButtonContainer';
 import LengthDropdown from './buttons/LengthDropdown';
 
-const ResponsiveModalCard = () => {
+const ResponsiveModalCard = ({ formVisible, onPasswordGenerate }) => {
   const [answers, setAnswers] = useState(['', '', '']);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectedLength, setSelectedLength] = useState('all');
@@ -22,7 +22,7 @@ const ResponsiveModalCard = () => {
     <StyledWrapper>
       <div className="modal">
         <HeaderContainer />
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form>
           <div id="questions">
             <QuestionsAnswersHandler 
               onAnswersChange={handleAnswersChange}
@@ -34,6 +34,7 @@ const ResponsiveModalCard = () => {
             answers={answers}
             selectedLength={selectedLength}
             selectedQuestions={selectedQuestions}
+            onPasswordGenerate={onPasswordGenerate}
           />
         </form>
       </div>

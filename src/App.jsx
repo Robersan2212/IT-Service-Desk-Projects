@@ -10,26 +10,27 @@ import PasswordAnalyzerCard from './assets/components/analyzerCard/PasswordAnaly
 function App() {
   const [formVisible, setFormVisible] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [generatedPassword, setGeneratedPassword] = useState('');
 
   useEffect(() => {
-   const timer = setTimeout(() => {
-       setLoading(false);
-       setTimeout(() => setFormVisible(true), 100);
-     }, 3000);
-     return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      setLoading(false);
+      setTimeout(() => setFormVisible(true), 100);
+    }, 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
-    return (
-      <LoaderContainer />
-    );
+    return <LoaderContainer />;
   }
 
-  //Main structure.
   return (
     <AppContainer>
-      <PasswordAnalyzerCard />
-      <StyledModalCard formVisible={formVisible} />
+      <PasswordAnalyzerCard password={generatedPassword} />
+      <ResponsiveModalCard 
+        formVisible={formVisible} 
+        onPasswordGenerate={setGeneratedPassword}
+      />
     </AppContainer>
   );
 }
