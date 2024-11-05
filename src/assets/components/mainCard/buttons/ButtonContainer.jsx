@@ -4,11 +4,11 @@ import MakeButton from "./MakeButton";
 import GenerationLoader from '../loader/GenerationLoader';
 
 
-const ButtonContainer = ({ answers, selectedLength, selectedQuestions, onPasswordGenerate }) => {
+const ButtonContainer = ({ answers, selectedLength, selectedQuestions, onPasswordGenerated }) => {
   const [isPasswordGenerated, setIsPasswordGenerated] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [lastPattern, setLastPattern] = useState(0); // Track last used pattern
+  const [lastPattern, setLastPattern] = useState(0);
 
   const generatePassword = async () => {
     const length = selectedLength === 'option-1' ? 12 : selectedLength === 'option-2' ? 16 : selectedLength === 'option-3' ? 18 : 12;
@@ -130,7 +130,9 @@ const ButtonContainer = ({ answers, selectedLength, selectedQuestions, onPasswor
       const newPassword = await generatePassword();
       setGeneratedPassword(newPassword);
       setIsPasswordGenerated(true);
-      onPasswordGenerate(newPassword); // Pass the password up to App component
+      if (onPasswordGenerated) {
+        onPasswordGenerated(newPassword);
+      }
     } catch (error) {
       console.error("Error generating password:", error);
       alert("There was an error generating your password. Please try again.");
@@ -144,7 +146,7 @@ const ButtonContainer = ({ answers, selectedLength, selectedQuestions, onPasswor
       {isGenerating ? (
         <GenerationWrapper>
           <GenerationLoader />
-          <LoadingText>Generating your secure password</LoadingText>
+          <LoadingText>Generating your secure password...</LoadingText>
         </GenerationWrapper>
       ) : (
         <MakeButton 
@@ -168,8 +170,8 @@ const StyledWrapper = styled.div`
   transition: margin 0.3s ease;
 
   @media (min-width: 1024px) and (max-width: 1440px) {
-    margin-top: ${props => props.isPasswordGenerated ? '60px' : '60px'};
-     margin-left: ${props => props.isPasswordGenerated ? '100px' : '40px'};
+    margin-top: ${props => props.isPasswordGenerated ? '30px' : '60px'};
+     margin-left: ${props => props.isPasswordGenerated ? '85px' : '40px'};
   }
   
   @media (max-width: 480px) {

@@ -65,8 +65,8 @@ const MakeButton = ({ onClick, isGenerating, generatedPassword, isPasswordGenera
   };
 
   const togglePasswordVisibility = (e) => {
-    e.preventDefault(); // Add this line
-    e.stopPropagation(); // Keep this line
+    e.preventDefault(); 
+    e.stopPropagation(); 
     setShowPassword(prev => !prev);
     if (!showPassword) {
       setTimeout(() => setShowPassword(false), 5000);
@@ -81,7 +81,7 @@ const MakeButton = ({ onClick, isGenerating, generatedPassword, isPasswordGenera
         } ${
           isPasswordGenerated ? 'min-w-[250px]' : 'min-w-[150px]'
         }`}
-        type="button" // Make sure this is "button"
+        type="button" 
         onClick={handleClick}
         disabled={isGenerating}
       >
@@ -95,7 +95,7 @@ const MakeButton = ({ onClick, isGenerating, generatedPassword, isPasswordGenera
                 {copySuccess ? '✓ Copied!' : '(Click to copy)'}
               </span>
               <button
-                type="button" // Add this line
+                type="button" 
                 onClick={togglePasswordVisibility}
                 className="ml-2 p-1 rounded-full hover:bg-gray-200 focus:outline-none"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
@@ -129,7 +129,7 @@ const MakeButton = ({ onClick, isGenerating, generatedPassword, isPasswordGenera
       {/* Regenerate Button */}
       {isPasswordGenerated && (
         <button
-          type="button" // Add this line
+          type="button" 
           onClick={handleRegenerate}
           disabled={isGenerating}
           className={`flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-sm transition-colors duration-300 ${
@@ -144,7 +144,7 @@ const MakeButton = ({ onClick, isGenerating, generatedPassword, isPasswordGenera
   );
 };
 
-// Icon components stay the same...
+
 const EyeIcon = ({ className }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 

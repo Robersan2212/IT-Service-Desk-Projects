@@ -48,8 +48,8 @@ const StyledWrapper = styled.div`
   //laptop screen size
   @media (min-width: 1024px) and (max-width: 1440px) {
     max-width: 700px;
-    margin-top: 55px;
-    margin-left:-48px;
+    margin-top: -65px;
+    margin-left:-88px;
     margin-right:80px;
     width: 68vh;
     height: 70vh;

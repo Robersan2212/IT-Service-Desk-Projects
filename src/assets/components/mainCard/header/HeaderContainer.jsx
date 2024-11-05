@@ -18,6 +18,7 @@ const Header = styled.div`
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
+  margin-left: 20px;
 
   @media (max-width: 600px) {
     flex-direction: column;
