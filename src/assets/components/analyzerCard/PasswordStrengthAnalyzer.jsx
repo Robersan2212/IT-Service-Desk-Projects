@@ -1,135 +1,142 @@
 import React, { useMemo } from 'react';
 
 const PasswordStrengthAnalyzer = ({ password }) => {
-  // SVG Icons as components
+  // Keep the icon components
   const ShieldIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     </svg>
   );
 
-  const ClockIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12 6 12 12 16 14"/>
-    </svg>
-  );
-
-  const AlertIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-      <line x1="12" y1="9" x2="12" y2="13"/>
-      <line x1="12" y1="17" x2="12.01" y2="17"/>
-    </svg>
-  );
-
   const CheckIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <circle cx="12" cy="12" r="12"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2">
+      <path d="M20 6L9 17l-5-5"/>
     </svg>
   );
 
+  // Password analysis logic stays the same
   const analyzePassword = useMemo(() => {
     if (!password) return null;
 
-    const criteria = {
-      length: password.length >= 12,
-      uppercase: /[A-Z]/.test(password),
-      lowercase: /[a-z]/.test(password),
-      numbers: /[0-9]/.test(password),
-      symbols: /[!@#$%^&*?]/.test(password),
+    const charSets = {
+      lowercase: /[a-z]/.test(password) ? 26 : 0,
+      uppercase: /[A-Z]/.test(password) ? 26 : 0,
+      numbers: /[0-9]/.test(password) ? 10 : 0,
+      symbols: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password) ? 33 : 0
     };
 
-    const strengthScore = Object.values(criteria).filter(Boolean).length;
+    const totalCharSet = Object.values(charSets).reduce((a, b) => a + b, 0);
+    const combinations = Math.pow(totalCharSet, password.length);
+    const entropy = Math.floor(password.length * Math.log2(totalCharSet || 1));
 
-    const getStrengthLabel = (score) => {
-      switch (score) {
-        case 5: return { label: 'Very Strong', color: '#059669' }; // emerald-600
-        case 4: return { label: 'Strong', color: '#16a34a' }; // green-600
-        case 3: return { label: 'Moderate', color: '#ca8a04' }; // yellow-600
-        case 2: return { label: 'Weak', color: '#ea580c' }; // orange-600
-        default: return { label: 'Very Weak', color: '#dc2626' }; // red-600
-      }
-    };
+    const strengthElements = [];
+    if (charSets.lowercase) strengthElements.push('Lowercase letters');
+    if (charSets.uppercase) strengthElements.push('Uppercase letters');
+    if (charSets.numbers) strengthElements.push('Numbers');
+    if (charSets.symbols) strengthElements.push('Special characters');
+    if (password.length >= 12) strengthElements.push('Sufficient length');
 
-    const estimateCrackTime = () => {
-      const combinations = {
-        lowercase: 26,
-        uppercase: 26,
-        numbers: 10,
-        symbols: 32
-      };
+    const calculateSimplifiedCrackTime = (combinations) => {
+      const speeds = { moderateBot: 1e10 };
+      const secondsToCrack = combinations / speeds.moderateBot;
+      const yearsToCrack = secondsToCrack / 31536000;
       
-      let possibleChars = 0;
-      if (/[a-z]/.test(password)) possibleChars += combinations.lowercase;
-      if (/[A-Z]/.test(password)) possibleChars += combinations.uppercase;
-      if (/[0-9]/.test(password)) possibleChars += combinations.numbers;
-      if (/[!@#$%^&*?]/.test(password)) possibleChars += combinations.symbols;
+      if (secondsToCrack < 1) return "instantly";
+      if (yearsToCrack < 1) return "less than a year";
+      if (yearsToCrack < 100) return `${Math.floor(yearsToCrack)} years`;
+      
+      const centuries = yearsToCrack / 100;
+      if (centuries < 1000) return `${Math.floor(centuries)} centuries`;
+      return `${Math.floor(centuries / 1000)}k centuries`;
+    };
 
-      // Assume 1 billion guesses per second for modern hardware
-      const guessesPerSecond = 1000000000;
-      const totalCombinations = Math.pow(possibleChars, password.length);
-      const seconds = totalCombinations / guessesPerSecond;
-
-      if (seconds < 60) return 'instantly';
-      if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
-      if (seconds < 86400) return `${Math.round(seconds / 3600)} hours`;
-      if (seconds < 31536000) return `${Math.round(seconds / 86400)} days`;
-      if (seconds < 315360000) return `${Math.round(seconds / 31536000)} years`;
-      return 'centuries';
+    const getStrengthLabel = () => {
+      if (entropy >= 80) return { label: 'Excellent', color: '#0d9488' };
+      if (entropy >= 60) return { label: 'Very Strong', color: '#22c55e' };
+      if (entropy >= 40) return { label: 'Strong', color: '#ca8a04' };
+      if (entropy >= 30) return { label: 'Moderate', color: '#ea580c' };
+      return { label: 'Weak', color: '#dc2626' };
     };
 
     return {
-      strength: getStrengthLabel(strengthScore),
-      crackTime: estimateCrackTime(),
-      criteria
+      strength: getStrengthLabel(),
+      entropy,
+      crackTime: calculateSimplifiedCrackTime(combinations),
+      strengthElements
     };
   }, [password]);
 
   if (!analyzePassword) return null;
 
-  const { strength, crackTime, criteria } = analyzePassword;
+  const { strength, entropy, crackTime, strengthElements } = analyzePassword;
 
   return (
-    <div style={{ marginTop: '1rem', gap: '1rem', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span style={{ color: strength.color }}><ShieldIcon /></span>
-        <span style={{ fontWeight: 500, color: strength.color }}>
-          {strength.label} Password
+    <div>
+      {/* Strength Indicator */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
+        <span style={{ color: strength.color }}>
+          <ShieldIcon />
         </span>
+        <div>
+          <div style={{ 
+            fontWeight: 500, 
+            color: strength.color,
+            fontSize: '1.1rem'
+          }}>
+            {strength.label} Password
+          </div>
+          <div style={{ 
+            color: strength.color,
+            fontSize: '0.9rem'
+          }}>
+            (Entropy: {entropy} bits)
+          </div>
+        </div>
       </div>
       
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#4b5563' }}>
-        <ClockIcon />
-        <span>Estimated crack time: <strong>{crackTime}</strong></span>
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <div style={{ fontSize: '0.875rem', fontWeight: 500, color: '#374151' }}>
-          Password Requirements:
+      {/* Crack Time Estimation */}
+      <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ 
+          fontSize: '1.1rem',
+          fontWeight: '500',
+          color: '#1f2937',
+          marginBottom: '0.5rem'
+        }}>
+          Time to Crack:
         </div>
         <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '0.5rem' 
+          fontSize: '1.25rem',
+          fontWeight: '500',
+          color: '#1f2937'
         }}>
-          {[
-            { label: '12+ characters', met: criteria.length },
-            { label: 'Uppercase letter', met: criteria.uppercase },
-            { label: 'Lowercase letter', met: criteria.lowercase },
-            { label: 'Number', met: criteria.numbers },
-            { label: 'Special character', met: criteria.symbols }
-          ].map((requirement, index) => (
-            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ color: requirement.met ? '#16a34a' : '#ca8a04' }}>
-                {requirement.met ? <CheckIcon /> : <AlertIcon />}
-              </span>
-              <span style={{ 
-                color: requirement.met ? '#374151' : '#6b7280',
-                fontSize: '0.875rem'
-              }}>
-                {requirement.label}
-              </span>
+          {crackTime}
+        </div>
+        <div style={{ 
+          fontSize: '0.875rem',
+          color: '#6b7280'
+        }}>
+        </div>
+      </div>
+
+      {/* Strength Elements */}
+      <div>
+        <div style={{ 
+          fontSize: '1.1rem',
+          fontWeight: '500',
+          color: '#1f2937',
+          marginBottom: '0.75rem'
+        }}>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {strengthElements.map((element, index) => (
+            <div key={index} style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.5rem',
+              color: '#22c55e'
+            }}>
+              <CheckIcon />
+              <span>{element}</span>
             </div>
           ))}
         </div>
