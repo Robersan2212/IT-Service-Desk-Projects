@@ -14,7 +14,6 @@ const PasswordStrengthAnalyzer = ({ password }) => {
     </svg>
   );
 
-  // Password analysis logic stays the same
   const analyzePassword = useMemo(() => {
     if (!password) return null;
 
@@ -72,7 +71,7 @@ const PasswordStrengthAnalyzer = ({ password }) => {
 
   return (
     <div>
-      {/* Strength Indicator */}
+      {/* Strength Indicator Section */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
         <span style={{ color: strength.color }}>
           <ShieldIcon />
@@ -94,7 +93,7 @@ const PasswordStrengthAnalyzer = ({ password }) => {
         </div>
       </div>
       
-      {/* Crack Time Estimation */}
+      {/* Crack Time Estimation Section */}
       <div style={{ marginBottom: '1.5rem' }}>
         <div style={{ 
           fontSize: '1.1rem',
@@ -118,7 +117,7 @@ const PasswordStrengthAnalyzer = ({ password }) => {
         </div>
       </div>
 
-      {/* Strength Elements */}
+      {/* Strength Elements Sections */}
       <div>
         <div style={{ 
           fontSize: '1.1rem',
