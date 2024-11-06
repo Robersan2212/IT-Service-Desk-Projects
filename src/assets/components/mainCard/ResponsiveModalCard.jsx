@@ -4,7 +4,6 @@ import HeaderContainer from "./header/HeaderContainer";
 import QuestionsAnswersHandler from "./actions/QuestionsAnswersHandler";
 import ButtonContainer from './buttons/ButtonContainer';
 import LengthDropdown from './buttons/LengthDropdown';
-import PasswordGenerator from './actions/PasswordGenerator';
 
 const ResponsiveModalCard = ({ onPasswordGenerate, formVisible, isDisabled }) => {
   const [answers, setAnswers] = useState(['', '', '']);

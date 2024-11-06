@@ -43,7 +43,7 @@ const PasswordGenerator = ({ answers, selectedLength, selectedQuestions }) => {
       return cleanAnswer.substring(0, partLength);
     });
 
-    // Add special characters and numbers
+    // Addds special characters and numbers
     const specialChars = '!@#$%^&*?';
     const specialChar1 = specialChars[getRandomNumber(0, specialChars.length - 1)];
     const specialChar2 = specialChars[getRandomNumber(0, specialChars.length - 1)];
@@ -67,7 +67,7 @@ const PasswordGenerator = ({ answers, selectedLength, selectedQuestions }) => {
     let newPassword = parts.join('');
     newPassword = newPassword.substring(0, passwordLength);
 
-    // Ensure password complexity
+    // Logic to ensure password complexity
     if (!/[!@#$%^&*?]/.test(newPassword)) {
       const randomIndex = getRandomNumber(0, newPassword.length - 1);
       newPassword = newPassword.substring(0, randomIndex) + 

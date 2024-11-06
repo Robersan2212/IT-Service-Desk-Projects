@@ -12,7 +12,7 @@ const TitleContainer = () => {
 }
 
 const Title = styled.div`
-  margin-left: 30px;
+  margin-left: 40px;
 
   h1 {
     font-size: 2.5rem;

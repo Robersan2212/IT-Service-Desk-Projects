@@ -56,16 +56,7 @@ function App() {
   );
 }
 
-const fadeInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+
 
 const expandIn = keyframes`
   from {
@@ -94,13 +85,6 @@ const AppContainer = styled.div`
 const AnalyzerWrapper = styled.div`
   animation: ${expandIn} 0.5s ease-out forwards;
   transform-origin: center left;
-`;
-
-const StyledModalCard = styled(ResponsiveModalCard)`
-  opacity: 0;
-  transform: translateY(20px);
-  animation: ${fadeInUp} 0.6s ease-out forwards;
-  animation-delay: ${props => props.formVisible ? '0s' : '0.3s'};
 `;
 
 export default App;
