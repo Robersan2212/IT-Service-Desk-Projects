@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Input from '../inputs/Input';
 
-// First, define the ChangeButtonStyle
 const ChangeButtonStyle = css`
   --primary-color: #0B6DA2;
   --secondary-color: #fff;
@@ -73,7 +72,7 @@ const ChangeButtonStyle = css`
   }
 `;
 
-// Then define the QuestionContainer that uses it
+
 const QuestionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -219,7 +218,7 @@ const shuffleQuestions = () => {
   const shuffled = [...questions].sort(() => 0.5 - Math.random());
   const selected = shuffled.slice(0, 3);
   setSelectedQuestions(selected);
-  onQuestionsChange(selected); // Pass questions up to parent
+  onQuestionsChange(selected); 
 };
 
 // Change a specific question
@@ -228,7 +227,7 @@ const changeQuestion = (index) => {
   const remainingQuestions = questions.filter(q => !selectedQuestions.includes(q));
   newQuestions[index] = remainingQuestions[Math.floor(Math.random() * remainingQuestions.length)];
   setSelectedQuestions(newQuestions);
-  onQuestionsChange(newQuestions); // Pass updated questions up
+  onQuestionsChange(newQuestions); 
   
   // Reset the answer for changed question
   const newAnswers = [...answers];
