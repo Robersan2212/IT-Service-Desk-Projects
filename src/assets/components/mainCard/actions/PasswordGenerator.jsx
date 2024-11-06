@@ -12,7 +12,7 @@ const PasswordGenerator = ({ answers, selectedLength, selectedQuestions }) => {
       case 'option-3':
         return 18;
       default:
-        return 12; // Default length if no option selected
+        return 12; // 12 character default length if no option selected
     }
   };
 
@@ -92,7 +92,7 @@ const PasswordGenerator = ({ answers, selectedLength, selectedQuestions }) => {
                      finalPassword.substring(pos + 1);
     }
     
-    // Ensure at least one number
+    // Ensure there is at least one number
     if (!/\d/.test(finalPassword)) {
       const pos = getRandomNumber(0, finalPassword.length - 1);
       finalPassword = finalPassword.substring(0, pos) + 
