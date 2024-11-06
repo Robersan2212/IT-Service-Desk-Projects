@@ -1,4 +1,4 @@
-import { ReactComponent as Magnifier } from './images/magnifying-glass-9-svgrepo-com.svg'
+import { ReactComponent as Magnifier } from './images/magnifying-glass-svgrepo-com (1).svg'
 
 import React from "react"
 import styled from "styled-components"
@@ -21,8 +21,7 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: flex-start;
     color: #006eb6;
-    font-size: 1.5rem;
-    font-family:'Roboto', sans-serif;
+    font-size: 1.6rem;
     font-weight: 500;
 
     //laptop screen size
