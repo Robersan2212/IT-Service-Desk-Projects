@@ -14,9 +14,11 @@ const PasswordStrengthAnalyzer = ({ password }) => {
     </svg>
   );
 
+    //Function to analyze password with predetirme sceneraios to calculate entropy and crack time.
   const analyzePassword = useMemo(() => {
     if (!password) return null;
 
+    //calculation total possible characters and combinations.
     const charSets = {
       lowercase: /[a-z]/.test(password) ? 26 : 0,
       uppercase: /[A-Z]/.test(password) ? 26 : 0,
